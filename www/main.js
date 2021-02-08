@@ -3,13 +3,16 @@
  */
 $(function(){
     // gather and display messages sent from a previous session, if any
-    var pastMessages = History.get();
-    if(pastMessages !== false){
-        for(var i=0; i<pastMessages.length; i++){
-            print(pastMessages[i].message, pastMessages[i].from);
-        }
-    }
+    // var pastMessages = History.get();
+    // if(pastMessages !== false){
+    //     for(var i=0; i<pastMessages.length; i++){
+    //         print(pastMessages[i].message, pastMessages[i].from);
+    //     }
+    // } else {
+    //     startNewOrder();
+    // }
 
+    startNewOrder();
     // get phone number used in a previous session, if any
     var phone = getPhoneNumber();
     if(phone === false){
@@ -21,12 +24,20 @@ $(function(){
     $('#msg').focus();
 });
 
+function startNewOrder() {
+    print("Welcome to Mama's Food, Place where you can build your own food from your comfort", 'server');
+    print("What would you like to have! 1 - Sandwich, 2 -Burger, 3 - pizza. Respond with the number", 'server');
+}
+
 /**
  * Click Event - Clear the message box and chat History
  */
 $('#clear').click(function(){
     localStorage.removeItem('history');
+    localStorage.removeItem('menuItem');
+    localStorage.clear();
     $('#messages').html('');
+    startNewOrder();
 });
 
 /**
@@ -55,8 +66,24 @@ function sendMessage(){
         History.add(msg, 'user');
         print(msg, 'user');
         $('#msg').val('').focus();
-        getNextStory(msg);
+        if(msg == 1 || msg == 2 || msg == 3) {
+            setMenuItem(msg);
+            getNextStory(msg);
+        } else if(localStorage.hasOwnProperty('menuItem')) {
+            getNextStory(msg);
+        }else{
+            print('Sry,I didnt get you. Please reply with requested reponse option.', 'server');
+        }
     }
+}
+
+function setMenuItem(inputValue) {
+    if(inputValue == 1)
+        localStorage.setItem('menuItem', 'SANDWICH');
+    else if(inputValue == 2) 
+        localStorage.setItem('menuItem', 'BURGER'); 
+    else if(inputValue == 3) 
+        localStorage.setItem('menuItem', 'PIZZA');   
 }
 
 /**
@@ -67,6 +94,7 @@ function getNextStory(msg){
     $.post('sms', {
         body: msg,
         dataType:"xml",
+        item: localStorage.getItem('menuItem'),
         from: getPhoneNumber()
     }, function(xData, status){
         // debug, log the status

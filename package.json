@@ -9,8 +9,7 @@
     "dev": "node index.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rhildred/es6test.git"
+    "type": "git"
   },
   "keywords": [
     "node",
@@ -18,14 +17,11 @@
     "problem",
     "solving"
   ],
-  "author": "Rich Hildred",
+  "author": "Thara Harikumar",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rhildred/es6test/issues"
-  },
-  "homepage": "https://github.com/rhildred/es6test#readme",
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "localstorage": "^1.0.1"
   },
   "babel": {
     "presets": [
