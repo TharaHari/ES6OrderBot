@@ -29,7 +29,7 @@ module.exports = class SandwichOrder extends Order{
         switch(this.stateCur){  
             case OrderState.WELCOMING:
                 this.stateCur = OrderState.SIZE
-                aReturn.push("What size of Sandwich would you like to order? Enter 6 for 6-inch or 12 for 12-inch");
+                aReturn.push("What size of Sandwich would you like to order? Enter '6' for 6-inch or '12' for 12-inch");
                 break;            
             case OrderState.SIZE:
                 this.stateCur = OrderState.BREAD
@@ -41,11 +41,11 @@ module.exports = class SandwichOrder extends Order{
                     this.sSize = '12-inch';
                     this.sandwichRt = this.sandwichRt + 2
                 }
-                aReturn.push("What type of bread would you like? Enter 1 for Italian or 2 for Italian Herbs and cheese?");
+                aReturn.push("What type of bread would you like? Enter 'I' for Italian or 'H' for Italian Herbs and cheese?");
                 break;
             case OrderState.BREAD:
                 this.stateCur = OrderState.TOPPINGS
-                if(sInput == 2) {
+                if(sInput == "H") {
                     this.sBread = 'Italian Herbs and cheese';
                     this.sandwichRt = this.sandwichRt + 2
                  } else {
@@ -83,7 +83,7 @@ module.exports = class SandwichOrder extends Order{
         switch(this.stateCur){
             case OrderState.WELCOMING:
                 this.stateCur = OrderState.SIZE
-                aReturn.push("What size of Burger would you like to order? Enter 4 for 4-oz or 6 for 6-oz");
+                aReturn.push("What size of Burger would you like to order? Enter '4' for 4-oz or '8' for 8-oz");
                 break;                
             case OrderState.SIZE:
                 this.stateCur = OrderState.BREAD
@@ -91,19 +91,19 @@ module.exports = class SandwichOrder extends Order{
                     this.sSize = '4-oz';
                     this.burgerRt = this.burgerRt + 2;
                 } 
-                if(sInput == 6) {
-                    this.sSize = '6-oz';
+                if(sInput == 8) {
+                    this.sSize = '8-oz';
                     this.burgerRt = this.burgerRt + 4;
                 }
-                aReturn.push("What type of bread would you like? Enter 1 for Sesame bun or 2 for Gluten Free bun");
+                aReturn.push("What type of bread would you like? Enter 'S' for Sesame bun or 'G' for Gluten Free bun");
                 break;
             case OrderState.BREAD:
                 this.stateCur = OrderState.TOPPINGS
-                if(sInput == 1) {
+                if(sInput == "S") {
                     this.sBread = 'Sesame';
                     this.burgerRt = this.burgerRt + 1.50;
                 } 
-                if(sInput == 2) {
+                if(sInput == "G") {
                     this.sBread = 'Gluten free';
                     this.burgerRt = this.burgerRt + 2.50;
                 }
@@ -138,15 +138,15 @@ module.exports = class SandwichOrder extends Order{
         switch(this.stateCur){
             case OrderState.WELCOMING:
                 this.stateCur = OrderState.SIZE;
-                aReturn.push("What size pizza would you like? Enter 1 for medium or 2 for Large");
+                aReturn.push("What size pizza would you like? Enter 'M' for medium or 'L' for Large");
                 break;
             case OrderState.SIZE:
                 this.stateCur = OrderState.TOPPINGS
-                if(sInput == 1) {
+                if(sInput == "M") {
                     this.sSize = 'Medium';
                     this.pizzaRt = this.pizzaRt + 2;
                 }
-                if(sInput == 2){
+                if(sInput == "L"){
                     this.sSize = 'Large';
                     this.pizzaRt = this.pizzaRt + 4;
                 } 
