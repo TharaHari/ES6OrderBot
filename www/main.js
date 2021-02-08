@@ -25,7 +25,7 @@ $(function(){
 });
 
 function startNewOrder() {
-    print("Welcome to Mama's Food, Place where you can build your own food from your comfort", 'server');
+    print("Welcome to Mama's Kitchen, Place where you can build your own food from your comfort", 'server');
     print("What would you like to have! 1 - Sandwich, 2 -Burger, 3 - pizza. Respond with the number", 'server');
 }
 
